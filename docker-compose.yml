@@ -1,0 +1,23 @@
+## Create a docker-compose file to run nginx and php-fpm
+version: '3.9'
+services:
+  php-fpm:
+    image: project/php-fpm:8.0.11
+    user: "${UID}:${GID}"
+    build:
+        context: ./config/containers/php-fpm
+        args:
+            PHP_VERSION: "8.0.11"
+    volumes:
+      - ./src:/var/www/html
+    environment:
+        - PROJECT_DIR=${PROJECT_DIR:-/users/luca/projects/my-project}
+  nginx:
+    image: nginx:stable-alpine3.17
+    ports:
+      - "8923:80"
+    volumes:
+      - ./src:/var/www/html:ro
+      - ./config/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - php-fpm
