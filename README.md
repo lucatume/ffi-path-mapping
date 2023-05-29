@@ -3,10 +3,11 @@ Proof of concept path-mapping free setup
 ## Usage
 
 Start the container providing the required user and local project directory information:
+
 ```
-docker compose build
-UID="$(id -u)" GID="$(id -g)" PROJECT_DIR="$(pwd)" docker compose up
+make build
 ```
+
 In your IDE, start listening for XDebug connections on port `9003`.
 Do not set up any path mappings.
 Add a breakpoint at line `5` of the `src/source-1.php` file.

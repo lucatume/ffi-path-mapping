@@ -1,0 +1,7 @@
+# Set-up the path prefixes
+source_prefix: /var/www/html
+target_prefix: /Users/lucatume/oss/ffi-path-mapping/src
+
+# The mapping table
+index.php = index.php
+source-1.php = source-1.php

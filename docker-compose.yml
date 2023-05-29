@@ -3,13 +3,14 @@ version: '3.9'
 services:
   php-fpm:
     image: project/php-fpm:8.0.11
-    user: "${UID}:${GID}"
+    user: "${DOCKER_UID}:${DOCKER_GID}"
     build:
         context: ./config/containers/php-fpm
         args:
             PHP_VERSION: "8.0.11"
     volumes:
       - ./src:/var/www/html
+      - ${DOCKER_PWD}:${DOCKER_PWD}
     environment:
         - PROJECT_DIR=${PROJECT_DIR:-/users/luca/projects/my-project}
   nginx:

@@ -3,7 +3,8 @@ FROM php:${PHP_VERSION}-fpm-alpine
 ARG FIXUID=1000
 ARG FIXGID=1000
 RUN curl -sSL https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions -o - | sh -s \
-          xdebug mysqli pdo_mysql ffi
+          mysqli pdo_mysql ffi \
+          xdebug/xdebug@bba72e77a1473f45c30c534a0c6b43987a3b1406
 # fixuid on /var/www/html
 RUN addgroup -g ${FIXGID} docker && \
     adduser -u ${FIXUID} -G docker -h /home/docker -s /bin/sh -D docker \
